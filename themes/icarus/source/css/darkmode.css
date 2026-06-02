@@ -1,0 +1,270 @@
+/* ===== 夜间模式样式 ===== */
+/* 切换按钮 */
+#dark-mode-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    color: inherit;
+}
+
+#dark-mode-toggle:hover {
+    transform: rotate(20deg) scale(1.15);
+}
+
+#dark-mode-toggle .icon {
+    font-size: 1.1rem;
+}
+
+/* 夜间模式变量 */
+html[data-theme="dark"] {
+    --dm-bg: #1a1a2e;
+    --dm-bg-bis: #16213e;
+    --dm-bg-ter: #0f3460;
+    --dm-card: #1e2a45;
+    --dm-text: #e0e0e0;
+    --dm-text-strong: #ffffff;
+    --dm-text-muted: #a0a0b0;
+    --dm-link: #7eb3ff;
+    --dm-link-hover: #a8d1ff;
+    --dm-border: #2d3a55;
+    --dm-navbar: #111827;
+    --dm-navbar-text: #e0e0e0;
+    --dm-shadow: rgba(0, 0, 0, 0.4);
+    --dm-code-bg: #0d1117;
+    --dm-blockquote-border: #3a5276;
+    --dm-tag-bg: #2d3a55;
+}
+
+/* 过渡动画（只在暗黑模式下生效时才切换，避免页面初次加载时有闪烁） */
+html[data-theme="dark"] *,
+html[data-theme="dark"] *::before,
+html[data-theme="dark"] *::after {
+    transition: background-color 0.3s ease, color 0.2s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+/* 全局背景和文字 */
+html[data-theme="dark"] body {
+    background-color: var(--dm-bg) !important;
+    color: var(--dm-text) !important;
+}
+
+html[data-theme="dark"] .section {
+    background-color: var(--dm-bg) !important;
+}
+
+/* 卡片 */
+html[data-theme="dark"] .card {
+    background-color: var(--dm-card) !important;
+    box-shadow: 0 2px 12px var(--dm-shadow) !important;
+    border: 1px solid var(--dm-border) !important;
+}
+
+html[data-theme="dark"] .card-content {
+    background-color: var(--dm-card) !important;
+}
+
+/* 文字颜色 */
+html[data-theme="dark"] p,
+html[data-theme="dark"] li,
+html[data-theme="dark"] span,
+html[data-theme="dark"] div,
+html[data-theme="dark"] label,
+html[data-theme="dark"] td,
+html[data-theme="dark"] th {
+    color: var(--dm-text) !important;
+}
+
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6,
+html[data-theme="dark"] strong,
+html[data-theme="dark"] b {
+    color: var(--dm-text-strong) !important;
+}
+
+/* 链接 */
+html[data-theme="dark"] a {
+    color: var(--dm-link) !important;
+}
+
+html[data-theme="dark"] a:hover {
+    color: var(--dm-link-hover) !important;
+}
+
+/* 导航栏 */
+html[data-theme="dark"] .navbar-main {
+    background-color: var(--dm-navbar) !important;
+    border-bottom: 1px solid var(--dm-border) !important;
+}
+
+html[data-theme="dark"] .navbar-item,
+html[data-theme="dark"] .navbar-item a {
+    color: var(--dm-navbar-text) !important;
+}
+
+html[data-theme="dark"] .navbar-item:hover,
+html[data-theme="dark"] .navbar-item:focus {
+    background-color: rgba(255,255,255,0.07) !important;
+    color: var(--dm-link-hover) !important;
+}
+
+/* 侧栏 */
+html[data-theme="dark"] .menu-label {
+    color: var(--dm-text-muted) !important;
+}
+
+html[data-theme="dark"] .menu-list a {
+    color: var(--dm-text) !important;
+}
+
+html[data-theme="dark"] .menu-list a:hover {
+    background-color: rgba(126, 179, 255, 0.12) !important;
+    color: var(--dm-link-hover) !important;
+}
+
+/* 代码块 */
+html[data-theme="dark"] pre,
+html[data-theme="dark"] code,
+html[data-theme="dark"] .highlight {
+    background-color: var(--dm-code-bg) !important;
+    color: #c9d1d9 !important;
+}
+
+html[data-theme="dark"] .highlight .gutter,
+html[data-theme="dark"] .highlight .gutter pre {
+    background-color: #161b22 !important;
+    color: #6e7681 !important;
+    border-color: var(--dm-border) !important;
+}
+
+html[data-theme="dark"] .highlight table {
+    border: 1px solid var(--dm-border) !important;
+}
+
+/* 引用块 */
+html[data-theme="dark"] blockquote {
+    background-color: rgba(126, 179, 255, 0.06) !important;
+    border-left-color: var(--dm-blockquote-border) !important;
+    color: var(--dm-text-muted) !important;
+}
+
+/* 标签 */
+html[data-theme="dark"] .tag {
+    background-color: var(--dm-tag-bg) !important;
+    color: var(--dm-text) !important;
+}
+
+/* 分页 */
+html[data-theme="dark"] .pagination-previous,
+html[data-theme="dark"] .pagination-next,
+html[data-theme="dark"] .pagination-link {
+    background-color: var(--dm-card) !important;
+    border-color: var(--dm-border) !important;
+    color: var(--dm-text) !important;
+}
+
+html[data-theme="dark"] .pagination-link.is-current {
+    background-color: #3a5276 !important;
+    border-color: #3a5276 !important;
+    color: #fff !important;
+}
+
+/* 搜索框 */
+html[data-theme="dark"] .searchbox .searchbox-container {
+    background-color: var(--dm-bg-bis) !important;
+    border-color: var(--dm-border) !important;
+}
+
+html[data-theme="dark"] .searchbox-input {
+    background-color: var(--dm-bg-bis) !important;
+    color: var(--dm-text) !important;
+}
+
+html[data-theme="dark"] .searchbox-result-item:hover {
+    background-color: rgba(255,255,255,0.07) !important;
+}
+
+/* 文章信息区 */
+html[data-theme="dark"] .article-meta {
+    color: var(--dm-text-muted) !important;
+}
+
+html[data-theme="dark"] .article-licensing {
+    background-color: var(--dm-bg-bis) !important;
+    border-color: var(--dm-border) !important;
+}
+
+/* 表格 */
+html[data-theme="dark"] table thead th {
+    background-color: var(--dm-bg-ter) !important;
+    color: var(--dm-text-strong) !important;
+}
+
+html[data-theme="dark"] table tbody tr:nth-child(even) {
+    background-color: rgba(255,255,255,0.03) !important;
+}
+
+html[data-theme="dark"] table td,
+html[data-theme="dark"] table th {
+    border-color: var(--dm-border) !important;
+}
+
+/* 页脚 */
+html[data-theme="dark"] .footer {
+    background-color: var(--dm-navbar) !important;
+    color: var(--dm-text-muted) !important;
+    border-top: 1px solid var(--dm-border) !important;
+}
+
+/* 侧栏 Profile */
+html[data-theme="dark"] .card .media-content .title a,
+html[data-theme="dark"] .card .media-content .subtitle {
+    color: var(--dm-text) !important;
+}
+
+/* 输入框 */
+html[data-theme="dark"] input,
+html[data-theme="dark"] textarea,
+html[data-theme="dark"] select {
+    background-color: var(--dm-bg-bis) !important;
+    color: var(--dm-text) !important;
+    border-color: var(--dm-border) !important;
+}
+
+/* 分割线 */
+html[data-theme="dark"] hr {
+    background-color: var(--dm-border) !important;
+}
+
+/* APlayer 音乐播放器暗色适配 */
+html[data-theme="dark"] .aplayer {
+    background-color: #1e2a45 !important;
+    color: var(--dm-text) !important;
+}
+
+html[data-theme="dark"] .aplayer .aplayer-info .aplayer-music .aplayer-title {
+    color: var(--dm-text-strong) !important;
+}
+
+html[data-theme="dark"] .aplayer .aplayer-info .aplayer-music .aplayer-author {
+    color: var(--dm-text-muted) !important;
+}
+
+html[data-theme="dark"] .aplayer .aplayer-list ol li:hover {
+    background-color: rgba(255,255,255,0.07) !important;
+}
+
+/* 文章标题下划线色 */
+html[data-theme="dark"] .title a {
+    color: var(--dm-text-strong) !important;
+}
