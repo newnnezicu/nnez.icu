@@ -68,9 +68,15 @@ class Navbar extends Component {
                         {showSearch ? <a class="navbar-item search" title={searchTitle} href="javascript:;">
                             <i class="fas fa-search"></i>
                         </a> : null}
-                        <a class="navbar-item" id="dark-mode-toggle" title="切换夜间模式" href="javascript:;">
-                            <i class="fas fa-moon"></i>
-                        </a>
+                        <div class="navbar-item theme-toggle-wrapper">
+                            <span class="toggle-icon toggle-icon-moon">🌙</span>
+                            <label class="theme-toggle-switch" title="切换日间/夜间模式">
+                                <input type="checkbox" id="dark-mode-checkbox" />
+                                <span class="theme-toggle-track"></span>
+                                <span class="theme-toggle-thumb"></span>
+                            </label>
+                            <span class="toggle-icon toggle-icon-sun">☀️</span>
+                        </div>
                     </div>
                 </div>
             </div>

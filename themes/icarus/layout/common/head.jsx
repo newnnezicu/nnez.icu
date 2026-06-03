@@ -170,7 +170,7 @@ module.exports = class extends Component {
             <link rel="stylesheet" href={fontCssUrl[variant]} />
             <link rel="stylesheet" href={url_for('/css/' + variant + '.css')} />
             <link rel="stylesheet" href={url_for('/css/darkmode.css')} />
-            <script dangerouslySetInnerHTML={{ __html: `(function(){var t=localStorage.getItem('nnez-theme');if(!t&&window.matchMedia&&window.matchMedia('(prefers-color-scheme:dark)').matches)t='dark';if(t)document.documentElement.setAttribute('data-theme',t);})();` }}></script>
+            <script dangerouslySetInnerHTML={{ __html: `(function(){if(window.matchMedia&&window.matchMedia('(prefers-color-scheme:dark)').matches){document.documentElement.setAttribute('data-theme','dark');}})();` }}></script>
             <Plugins site={site} config={config} helper={helper} page={page} head={true} />
 
             {adsenseClientId ? <script data-ad-client={adsenseClientId}

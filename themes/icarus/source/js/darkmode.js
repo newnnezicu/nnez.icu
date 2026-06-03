@@ -1,74 +1,51 @@
 /**
- * 夜间模式切换逻辑
- * 使用 localStorage 记住用户偏好
- * 支持跟随系统偏好（prefers-color-scheme）作为默认值
+ * 夜间模式 - 完全跟随系统 prefers-color-scheme
+ * 用户也可以手动拨动开关覆盖，但刷新后重新跟随系统
+ * （去掉 localStorage 持久化，确保系统联动）
  */
 (function () {
     'use strict';
 
-    var STORAGE_KEY = 'nnez-theme';
-    var DARK = 'dark';
-    var LIGHT = 'light';
+    var mq = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
 
-    // 获取当前应使用的主题
-    function getPreferredTheme() {
-        var saved = localStorage.getItem(STORAGE_KEY);
-        if (saved) return saved;
-        // 跟随系统偏好
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            return DARK;
-        }
-        return LIGHT;
+    function isDark() {
+        return mq && mq.matches;
     }
 
-    // 应用主题到 html 元素
-    function applyTheme(theme) {
-        document.documentElement.setAttribute('data-theme', theme);
-        var btn = document.getElementById('dark-mode-toggle');
-        if (!btn) return;
-        var icon = btn.querySelector('i');
-        if (!icon) return;
-        if (theme === DARK) {
-            icon.className = 'fas fa-sun';
-            btn.setAttribute('title', '切换到日间模式');
-        } else {
-            icon.className = 'fas fa-moon';
-            btn.setAttribute('title', '切换到夜间模式');
-        }
+    function applyTheme(dark) {
+        document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+        var cb = document.getElementById('dark-mode-checkbox');
+        if (cb) cb.checked = dark;
     }
 
-    // 切换主题
-    function toggleTheme() {
-        var current = document.documentElement.getAttribute('data-theme') || LIGHT;
-        var next = current === DARK ? LIGHT : DARK;
-        localStorage.setItem(STORAGE_KEY, next);
-        applyTheme(next);
-    }
-
-    // 在 DOM 加载完毕后绑定按钮事件
     function init() {
-        applyTheme(getPreferredTheme());
-        var btn = document.getElementById('dark-mode-toggle');
-        if (btn) {
-            btn.addEventListener('click', toggleTheme);
+        // 跟随系统初始状态
+        applyTheme(isDark());
+
+        var cb = document.getElementById('dark-mode-checkbox');
+        if (cb) {
+            cb.addEventListener('change', function () {
+                // 手动切换（本次页面有效，刷新后重新跟随系统）
+                applyTheme(cb.checked);
+            });
+        }
+
+        // 监听系统主题实时变化
+        if (mq && mq.addEventListener) {
+            mq.addEventListener('change', function (e) {
+                applyTheme(e.matches);
+            });
+        } else if (mq && mq.addListener) {
+            // 兼容旧版浏览器
+            mq.addListener(function (e) {
+                applyTheme(e.matches);
+            });
         }
     }
-
-    // 立即应用主题（防止白屏闪烁）
-    document.documentElement.setAttribute('data-theme', getPreferredTheme());
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
     } else {
         init();
-    }
-
-    // 监听系统主题变化（仅当用户没有手动设置时生效）
-    if (window.matchMedia) {
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
-            if (!localStorage.getItem(STORAGE_KEY)) {
-                applyTheme(e.matches ? DARK : LIGHT);
-            }
-        });
     }
 })();
