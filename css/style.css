@@ -10746,7 +10746,7 @@ body > .section {
 }
 .image .avatar {
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 .image .fill {
   object-fit: cover;
